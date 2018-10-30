@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("PDFtoPrinter")]
-[assembly: AssemblyDescription("Util to send PDF documents direct to a printer")]
+[assembly: AssemblyDescription("Util to print PDF documents using PDFtoPrinter utility")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Sergey Vishnesky")]
 [assembly: AssemblyProduct("PDFtoPrinter")]
