@@ -1,0 +1,9 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <Target Name="CopyTools" BeforeTargets="Build">
+       <Copy      
+          SourceFiles="$(MSBuildThisFileDirectory)\PDFtoPrinter.exe"
+         DestinationFiles="$(MSBuildProjectDirectory)\bin\$(Configuration)\PDFtoPrinter.exe"
+         Condition="!Exists('$(MSBuildProjectDirectory)\bin\$(Configuration)\PDFtoPrinter.exe')"
+        />
+  </Target>
+</Project>

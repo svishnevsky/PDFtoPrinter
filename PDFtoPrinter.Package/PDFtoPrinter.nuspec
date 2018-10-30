@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://choosealicense.com/licenses/mit/</licenseUrl>
+    <projectUrl>https://github.com/svishnevsky/PDFtoPrinter</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Create warpper over PDFtoPrint.exe.</releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <tags>PDF Printing</tags>
+  </metadata>
+  <files>
+    <file src="PDFtoPrinter.targets" target="Build\" />
+    <file src=".\PDFtoPrinter.exe" target="Build\" />
+  </files>
+</package>
