@@ -9,13 +9,18 @@ The PDFtoPrinter project Allows to print PDF files uses [PDFtoPrinter](http://ww
 Sample usage:
 
 ```C#
+var filePath = "c:\path\to\pdf\file.pdf";
+var printerName = "Vendor Color Printer Name";
 var printWrapper = new PDFtoPrintWrapper();
-printWrapper.Print("c:\path\to\pdf\file.pdf", "Vendor Color Printer Name");
+printWrapper.Print(filePath, printerName);
 ```
 
 or
 
 ```C#
+var filePath = "c:\path\to\pdf\file.pdf";
+var networkPrinterName = "\\myprintserver\printer1";
+var printTimeout = new TimeSpan(0, 30, 0);
 var printWrapper = new PDFtoPrintWrapper();
-printWrapper.Print("c:\path\to\pdf\file.pdf", "\\myprintserver\printer1", new TimeSpan(0, 30, 0));
+printWrapper.Print(filePath, networkPrinterName, printTimeout);
 ```
