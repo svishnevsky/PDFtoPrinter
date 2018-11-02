@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net45;net46;net47</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Sergey Vishnesky</Authors>
+    <Company>Sergey Vishnesky</Company>
+    <Product>PDFtoPrinter</Product>
+    <Description>Util to print PDF documents using PDFtoPrinter utility</Description>
+    <Copyright>Copyright 2018</Copyright>
+    <PackageLicenseUrl>https://choosealicense.com/licenses/mit/</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/svishnevsky/PDFtoPrinter</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/svishnevsky/PDFtoPrinter</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>PDF Printing</PackageTags>
+    <PackageReleaseNotes>Added support of additional frameworks</PackageReleaseNotes>
+    <PackageId>PDFtoPrinter</PackageId>
+    <RootNamespace>PDFtoPrinter</RootNamespace>
+    <AssemblyName>PDFtoPrinter</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="PDFtoPrinter.exe">
+      <Pack>true</Pack>
+      <PackagePath>build</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <Import Project="PDFtoPrinter.targets" />
+
+</Project>
