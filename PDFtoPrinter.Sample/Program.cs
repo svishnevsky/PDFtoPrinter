@@ -5,7 +5,7 @@
         static void Main(string[] args)
         {
             var wrapper = new PDFtoPrintWrapper();
-            wrapper.Print("somefile.pdf", "Microsoft Print to PDF");
+            wrapper.Print("somefile.pdf", "Microsoft Print to PDF").Wait();
         }
     }
 }
