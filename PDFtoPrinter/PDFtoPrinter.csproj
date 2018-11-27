@@ -20,12 +20,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="PDFtoPrinter.exe">
+    <None Include="build\*.*">
       <Pack>true</Pack>
       <PackagePath>build</PackagePath>
     </None>
   </ItemGroup>
-
-  <Import Project="PDFtoPrinter.targets" />
 
 </Project>
