@@ -9,7 +9,7 @@ namespace PDFtoPrinter
     public class PDFtoPrintWrapper
     {
         private static readonly string utilPath = Path.Combine(
-            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), 
+            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
             "PDFtoPrinter.exe");
         private static readonly TimeSpan printTimeout = new TimeSpan(0, 1, 0);
 
@@ -38,7 +38,7 @@ namespace PDFtoPrinter
                 proc.Start();
                 bool result = await proc.WaitForExitAsync(timeount ?? printTimeout);
                 if (!result)
-                {                    
+                {
                     proc.Kill();
                 }
             }

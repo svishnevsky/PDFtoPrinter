@@ -1,41 +1,16 @@
-﻿using Microsoft.Win32.SafeHandles;
-using System;
+﻿using System;
 using System.Diagnostics;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace PDFtoPrinter
 {
     public static class ProcessExtentions
     {
-        public static Task<bool> WaitForExitAsync(
+        public static async Task<bool> WaitForExitAsync(
             this Process process, TimeSpan timeout)
         {
-            using (var processWaitObject = new ManualResetEvent(false)
-            {
-                SafeWaitHandle = new SafeWaitHandle(process.Handle, false)
-            })
-            {
-                var tcs = new TaskCompletionSource<bool>();
-                RegisteredWaitHandle registeredProcessWaitHandle = null;
-                registeredProcessWaitHandle = ThreadPool.RegisterWaitForSingleObject(
-                    processWaitObject,
-                    delegate (object state, bool timedOut)
-                    {
-                        if (!timedOut)
-                        {
-                            registeredProcessWaitHandle?.Unregister(null);
-                        }
-
-                        processWaitObject.Dispose();
-                        tcs.SetResult(!timedOut);
-                    },
-                    null,
-                    timeout,
-                    true);
-
-                return tcs.Task;
-            }
+            return await Task.Factory.StartNew(
+                () => process.WaitForExit((int)timeout.TotalMilliseconds));
         }
     }
 }
