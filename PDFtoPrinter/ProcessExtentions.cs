@@ -10,7 +10,8 @@ namespace PDFtoPrinter
             this Process process, TimeSpan timeout)
         {
             return await Task.Factory.StartNew(
-                () => process.WaitForExit((int)timeout.TotalMilliseconds));
+                () => process.WaitForExit((int)timeout.TotalMilliseconds))
+                .ConfigureAwait(false);
         }
     }
 }
