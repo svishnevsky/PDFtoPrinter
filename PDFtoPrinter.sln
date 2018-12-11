@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFtoPrinter.Sample", "PDFt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PDFtoPrinter", "PDFtoPrinter\PDFtoPrinter.csproj", "{31FC7040-0FFF-450D-BBF5-0E2EE663787C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFtoPrinter.Tests", "tests\PDFtoPrinter.Tests\PDFtoPrinter.Tests.csproj", "{DD63F45D-4E26-48D9-B2F2-986940D51F10}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{892BAE76-70C0-4305-98DD-D373A6BACF68}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +25,16 @@ Global
 		{31FC7040-0FFF-450D-BBF5-0E2EE663787C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31FC7040-0FFF-450D-BBF5-0E2EE663787C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31FC7040-0FFF-450D-BBF5-0E2EE663787C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD63F45D-4E26-48D9-B2F2-986940D51F10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD63F45D-4E26-48D9-B2F2-986940D51F10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD63F45D-4E26-48D9-B2F2-986940D51F10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD63F45D-4E26-48D9-B2F2-986940D51F10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DD63F45D-4E26-48D9-B2F2-986940D51F10} = {892BAE76-70C0-4305-98DD-D373A6BACF68}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {288FDBFA-5712-4CD1-B1F6-55A5C6124CEC}
