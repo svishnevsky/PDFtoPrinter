@@ -10,7 +10,7 @@ namespace PDFtoPrinter
     /// Wrapper over the PDFtoPrinting.exe utility. 
     /// Runs new PDFtoPrinting.exe instance per Print call.
     /// </summary>
-    public class PDFtoPrinterWrapper : IPDFtoPrinterWrapper
+    public class PDFtoPrinterPrinter : IPrinter
     {
         private const string UtilName = "PDFtoPrinter.exe";
         private static readonly string UtilPath = GetUtilPath(UtilName);
@@ -20,24 +20,24 @@ namespace PDFtoPrinter
         private readonly IProcessFactory processFactory;
 
         /// <summary>
-        /// Creates new <see cref="PDFtoPrinterWrapper"/> instance without concurrent printing.
+        /// Creates new <see cref="PDFtoPrinterPrinter"/> instance without concurrent printing.
         /// <param name="processFactory"><see cref="IProcessFactory"/> instance.</param>
         /// </summary>
-        public PDFtoPrinterWrapper(
+        public PDFtoPrinterPrinter(
             IProcessFactory processFactory = null)
             : this(1, processFactory)
         {
         }
 
         /// <summary>
-        /// Creates new <see cref="PDFtoPrinterWrapper"/> instance with concurrent printing.
+        /// Creates new <see cref="PDFtoPrinterPrinter"/> instance with concurrent printing.
         /// </summary>
         /// <param name="maxConcurrentPrintings">Max count of cuncurrent printings.</param>
         /// <param name="processFactory"><see cref="IProcessFactory"/> instance.</param>
         /// <exception cref="ArgumentException">
         /// Thows an exception if <paramref name="maxConcurrentPrintings"/> less or equals 0.
         /// </exception>
-        public PDFtoPrinterWrapper(
+        public PDFtoPrinterPrinter(
             int maxConcurrentPrintings,
             IProcessFactory processFactory = null)
         {
@@ -52,25 +52,22 @@ namespace PDFtoPrinter
             this.processFactory = processFactory ?? new SystemProcessFactory();
         }
 
-        /// <summary>
-        /// Runs new PDFtoPrinter.exe process with passed parameters
-        /// </summary>
-        /// <param name="filePath">Path to a PDF file.</param>
-        /// <param name="printerName">
-        /// Name of a printer (if the printer is network, use network format e.g. "\\printmachine\defaultprinter").
-        /// </param>
-        /// <param name="timeout">
-        /// Printing timeout. If PDFtoPrinter.exe process isn't exited after this timeout, 
-        /// the process will be killed. Default value is 1 minute.
-        /// </param>
-        /// <returns>Asynchronous task.</returns>
-        public async Task Print(
+        [Obsolete("Please use \"Task Print(PrintingOptions options, TimeSpan? timeout = null)\" method instead.")]
+        public Task Print(
             string filePath, string printerName, TimeSpan? timeout = null)
+        {
+            return this.Print(
+                new PrintingOptions(printerName, filePath),
+                timeout);
+        }
+
+        /// <inheritdoc/>
+        public async Task Print(PrintingOptions options, TimeSpan? timeout = null)
         {
             await this.semaphore.WaitAsync().ConfigureAwait(false);
             try
             {
-                using (IProcess proc = this.CreateProcess(filePath, printerName))
+                using (IProcess proc = this.processFactory.Create(UtilPath, options))
                 {
                     proc.Start();
                     bool result = await proc
@@ -86,11 +83,6 @@ namespace PDFtoPrinter
             {
                 this.semaphore.Release();
             }
-        }
-
-        private IProcess CreateProcess(string filePath, string printerName)
-        {
-            return this.processFactory.Create(UtilPath, filePath, printerName);
         }
 
         private static string GetUtilPath(string utilName)

@@ -9,7 +9,10 @@ using System.Timers;
 
 namespace PDFtoPrinter
 {
-    public class CleanUpFilesPDFtoPrinterWrapper : IPDFtoPrinterWrapper
+    /// <summary>
+    /// Deletes files after printing. Doesn't print files by itselves but use inner printer.
+    /// </summary>
+    public class CleanupFilesPrinter : IPrinter
     {
         private static readonly IDictionary<string, ConcurrentQueue<string>> PrintingQueues =
             new ConcurrentDictionary<string, ConcurrentQueue<string>>();
@@ -21,23 +24,29 @@ namespace PDFtoPrinter
         };
         private static bool DeletingInProgress = false;
 
-        private readonly IPDFtoPrinterWrapper inner;
+        private readonly IPrinter inner;
 
-        static CleanUpFilesPDFtoPrinterWrapper()
+        static CleanupFilesPrinter()
         {
             CleanupTimer.Elapsed += CleanupTimerElapsed;
             CleanupTimer.Enabled = true;
         }
 
-        public CleanUpFilesPDFtoPrinterWrapper(IPDFtoPrinterWrapper inner)
+
+        /// <summary>
+        /// Creates new <see cref="CleanupFilesPrinter"/> instance.
+        /// </summary>
+        /// <param name="inner">The inner printer that will print files.</param>
+        public CleanupFilesPrinter(IPrinter inner)
         {
             this.inner = inner;
         }
-
-        public async Task Print(string filePath, string printerName, TimeSpan? timeout = null)
+        
+        /// <inheritdoc/>
+        public async Task Print(PrintingOptions options, TimeSpan? timeout = null)
         {
-            await this.inner.Print(filePath, printerName, timeout);
-            this.EnqueuePrintingFile(printerName, filePath);
+            await this.inner.Print(options, timeout);
+            this.EnqueuePrintingFile(options.PrinterName, options.FilePath);
         }
 
         private void EnqueuePrintingFile(string printerName, string filePath)

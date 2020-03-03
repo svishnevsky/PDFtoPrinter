@@ -4,8 +4,10 @@
     {
         private static void Main(string[] args)
         {
-            var wrapper = new PDFtoPrinterWrapper();
-            wrapper.Print("somefile.pdf", "Microsoft Print to PDF").Wait();
+            var wrapper = new PDFtoPrinterPrinter();
+            wrapper
+                .Print(new PrintingOptions("Microsoft Print to PDF", "somefile.pdf"))
+                .Wait();
         }
     }
 }

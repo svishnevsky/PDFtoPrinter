@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Linq;
 
 namespace PDFtoPrinter
 {
@@ -7,7 +6,7 @@ namespace PDFtoPrinter
     public class SystemProcessFactory : IProcessFactory
     {
         /// <inheritdoc/>
-        public IProcess Create(string executablePath, params string[] args)
+        public IProcess Create(string executablePath, PrintingOptions options)
         {
             return new Process
             {
@@ -15,7 +14,7 @@ namespace PDFtoPrinter
                 {
                     WindowStyle = ProcessWindowStyle.Hidden,
                     FileName = executablePath,
-                    Arguments = string.Join(" ", args.Select(x => $"\"{x}\"")),
+                    Arguments = options.ToString(),
                     UseShellExecute = false,
                     CreateNoWindow = true
                 }

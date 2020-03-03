@@ -2,8 +2,8 @@
 
 namespace PDFtoPrinter
 {
-    [Obsolete]
-    public class PDFtoPrintWrapper : PDFtoPrinterWrapper
+    [Obsolete("Please use \"PDFtoPrinterPrinter\" instead.")]
+    public class PDFtoPrintWrapper : PDFtoPrinterPrinter
     {
         public PDFtoPrintWrapper(
             IProcessFactory processFactory = null)

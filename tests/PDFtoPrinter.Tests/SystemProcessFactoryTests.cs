@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace PDFtoPrinter.Tests
@@ -11,13 +10,15 @@ namespace PDFtoPrinter.Tests
         public void WhenParametersValid_ThenCreateProcessInstance()
         {
             const string ExecutablePath = "pathto.exe";
-            string[] args = new[] { "arg1", "arg2" };
+            const string PrinterName = "printer";
+            const string FilePath = "file.path";
+            var options = new PrintingOptions(PrinterName, FilePath);
             var factory = new SystemProcessFactory();
 
-            var process = (Process)factory.Create(ExecutablePath, args);
+            var process = (Process)factory.Create(ExecutablePath, options);
 
             Assert.AreEqual(
-                process.StartInfo.WindowStyle, 
+                process.StartInfo.WindowStyle,
                 ProcessWindowStyle.Hidden);
             Assert.AreEqual(
                 process.StartInfo.UseShellExecute,
@@ -30,7 +31,7 @@ namespace PDFtoPrinter.Tests
                 ExecutablePath);
             Assert.AreEqual(
                 process.StartInfo.Arguments,
-                string.Join(" ", args.Select(x => $"\"{x}\"")));
+                $"\"{FilePath}\" \"{PrinterName}\"");
         }
     }
 }
