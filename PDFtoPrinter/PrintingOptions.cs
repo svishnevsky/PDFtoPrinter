@@ -80,14 +80,13 @@ namespace PDFtoPrinter
                 " ",
                 new[]
                 {
-                    this.FilePath,
-                    this.PrinterName,
-                    this.Pages,
-                    this.Copies?.ToString(),
-                    this.Focus
+                    this.FilePath.Format(x => $"\"{x}\""),
+                    this.PrinterName.Format(x => $"\"{x}\""),
+                    this.Pages.Format(x => $"pages={x}"),
+                    this.Copies?.ToString().Format(x => $"copies={x}"),
+                    this.Focus.Format(x => $"focus=\"{x}\"")
                 }
-                .Where(x => !string.IsNullOrEmpty(x))
-                .Select(x => $"\"{x}\""));
+                .Where(x => !string.IsNullOrEmpty(x)));
         }
     }
 }
