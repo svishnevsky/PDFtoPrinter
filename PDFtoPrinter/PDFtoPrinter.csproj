@@ -8,7 +8,7 @@
     <Product>PDFtoPrinter</Product>
     <Description>Util to print PDF documents using PDFtoPrinter utility</Description>
     <Copyright>Copyright 2018</Copyright>
-    <PackageLicenseUrl>https://choosealicense.com/licenses/mit/</PackageLicenseUrl>
+    <PackageLicense>https://choosealicense.com/licenses/mit/</PackageLicense>
     <PackageProjectUrl>https://github.com/svishnevsky/PDFtoPrinter</PackageProjectUrl>
     <RepositoryUrl>https://github.com/svishnevsky/PDFtoPrinter</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
