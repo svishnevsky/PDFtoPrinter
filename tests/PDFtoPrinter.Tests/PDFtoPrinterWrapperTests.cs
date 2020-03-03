@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -9,7 +8,7 @@ using Moq;
 namespace PDFtoPrinter.Tests
 {
     [TestClass]
-    public class PDFtoPrintWrapperTests
+    public class PDFtoPrinterWrapperTests
     {
         private const string FilePath = "pathto.file";
         private const string PrinterName = "someprinter";
@@ -21,7 +20,7 @@ namespace PDFtoPrinter.Tests
         public void WhenMaxCuncurrencyInvalid_ThenThrowException(int maxCuncurrency)
         {
             ArgumentException exception = Assert.ThrowsException<ArgumentException>(
-                () => new PDFtoPrintWrapper(maxCuncurrency));
+                () => new PDFtoPrinterWrapper(maxCuncurrency));
             Assert.AreEqual(
                 "Value should be greater than zero.\r\nParameter name: maxConcurrentPrintings",
                 exception.Message);
@@ -33,7 +32,7 @@ namespace PDFtoPrinter.Tests
         [DataRow(int.MaxValue)]
         public void WhenMaxCuncurrencyValid_ThenCreateInstance(int maxCuncurrency)
         {
-            var wrapper = new PDFtoPrintWrapper(maxCuncurrency);
+            var wrapper = new PDFtoPrinterWrapper(maxCuncurrency);
 
             Assert.IsNotNull(wrapper);
         }
@@ -41,7 +40,7 @@ namespace PDFtoPrinter.Tests
         [TestMethod]
         public void WhenCallDefaultConstructor_ThenCreateInstance()
         {
-            var wrapper = new PDFtoPrintWrapper();
+            var wrapper = new PDFtoPrinterWrapper();
 
             Assert.IsNotNull(wrapper);
         }
@@ -53,7 +52,7 @@ namespace PDFtoPrinter.Tests
             var timeout = TimeSpan.FromMinutes(2);
             process.Setup(x => x.WaitForExitAsync(timeout))
                 .ReturnsAsync(true);
-            var wrapper = new PDFtoPrintWrapper(
+            var wrapper = new PDFtoPrinterWrapper(
                 CreateProcessFactory(process.Object));
 
             await wrapper.Print(FilePath, PrinterName, timeout);
@@ -68,7 +67,7 @@ namespace PDFtoPrinter.Tests
             var process = new Mock<IProcess>();
             process.Setup(x => x.WaitForExitAsync(TimeSpan.FromMinutes(1)))
                 .ReturnsAsync(false);
-            var wrapper = new PDFtoPrintWrapper(
+            var wrapper = new PDFtoPrinterWrapper(
                 CreateProcessFactory(process.Object));
 
             await wrapper.Print(FilePath, PrinterName);
@@ -84,7 +83,7 @@ namespace PDFtoPrinter.Tests
                 .Setup(x => x.Create(
                     Path.Combine(
                         Path.GetDirectoryName(
-                            typeof(PDFtoPrintWrapper).Assembly.Location),
+                            typeof(PDFtoPrinterWrapper).Assembly.Location),
                         "PDFtoPrinter.exe"),
                     It.Is<string[]>(a => a.SequenceEqual(new[] { FilePath, PrinterName }))))
                 .Returns(process);

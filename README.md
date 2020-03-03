@@ -39,3 +39,11 @@ for (var i = 0; i < 10; i++)
     wrapper.Print(filePath, networkPrinterName);
 }
 ```
+
+If you need to delete files after printing you can use "CleanUpFilesPDFtoPrinterWrapper":
+```C#
+var filePath = "c:\path\to\pdf\file.pdf";
+var networkPrinterName = "\\myprintserver\printer1";
+var printWrapper = new CleanUpFilesPDFtoPrinterWrapper(new PDFtoPrintWrapper());
+printWrapper.Print(filePath, networkPrinterName);
+```
