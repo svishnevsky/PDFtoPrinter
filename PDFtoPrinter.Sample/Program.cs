@@ -1,10 +1,10 @@
 ﻿namespace PDFtoPrinter.Sample
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            var wrapper = new PDFtoPrintWrapper();
+            var wrapper = new PDFtoPrinterWrapper();
             wrapper.Print("somefile.pdf", "Microsoft Print to PDF").Wait();
         }
     }
