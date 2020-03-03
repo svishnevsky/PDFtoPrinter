@@ -11,7 +11,7 @@ The PDFtoPrinter project Allows to print PDF files uses [PDFtoPrinter](http://ww
 
 Sample usage:
 
-USe local printer
+Use local printer
 ```C#
 var filePath = "c:\path\to\pdf\file.pdf";
 var printerName = "Vendor Color Printer Name";
