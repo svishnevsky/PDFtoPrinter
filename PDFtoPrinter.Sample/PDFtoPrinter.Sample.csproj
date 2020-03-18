@@ -56,10 +56,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PDFtoPrinter\PDFtoPrinter.csproj">
-      <Project>{31fc7040-0fff-450d-bbf5-0e2ee663787c}</Project>
-      <Name>PDFtoPrinter</Name>
-    </ProjectReference>
+    <PackageReference Include="PDFtoPrinter">
+      <Version>1.0.0</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
