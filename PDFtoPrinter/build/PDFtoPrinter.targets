@@ -5,4 +5,10 @@
        DestinationFiles="$(OutDir)\PDFtoPrinter.exe"
        Condition="!Exists('$(OutDir)\PDFtoPrinter.exe')" />
   </Target>
+  <Target Name="CopyPDFtoPrinterExe" AfterTargets="Publish">
+    <Copy 
+      SourceFiles="$(MSBuildThisFileDirectory)PDFtoPrinter.exe" 
+      DestinationFolder="$(PublishDir)"
+      SkipUnchangedFiles="true" />
+  </Target>
 </Project>
