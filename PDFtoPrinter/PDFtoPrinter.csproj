@@ -13,7 +13,7 @@
     <RepositoryUrl>https://github.com/svishnevsky/PDFtoPrinter</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>PDF Printing</PackageTags>
-    <PackageReleaseNotes>Added support of additional frameworks</PackageReleaseNotes>
+    <PackageReleaseNotes>Update PDFtoPrinter.exe util to July 2020 version</PackageReleaseNotes>
     <PackageId>PDFtoPrinter</PackageId>
     <RootNamespace>PDFtoPrinter</RootNamespace>
     <AssemblyName>PDFtoPrinter</AssemblyName>
