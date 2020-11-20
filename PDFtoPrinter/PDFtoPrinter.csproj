@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net45;net46;net47;netstandard2.0;</TargetFrameworks>
+    <TargetFrameworks>net45;net46;net47;net48;netstandard2.0;</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Sergey Vishnesky</Authors>
     <Company>Sergey Vishnesky</Company>
@@ -13,7 +13,7 @@
     <RepositoryUrl>https://github.com/svishnevsky/PDFtoPrinter</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>PDF Printing</PackageTags>
-    <PackageReleaseNotes>Update PDFtoPrinter.exe util to July 2020 version</PackageReleaseNotes>
+    <PackageReleaseNotes>Prevent JS running</PackageReleaseNotes>
     <PackageId>PDFtoPrinter</PackageId>
     <RootNamespace>PDFtoPrinter</RootNamespace>
     <AssemblyName>PDFtoPrinter</AssemblyName>
