@@ -4,10 +4,18 @@
        SourceFiles="$(MSBuildThisFileDirectory)PDFtoPrinter.exe"
        DestinationFiles="$(OutDir)\PDFtoPrinter.exe"
        Condition="!Exists('$(OutDir)\PDFtoPrinter.exe')" />
+    <Copy
+       SourceFiles="$(MSBuildThisFileDirectory)PDF-XChange Viewer Settings.dat"
+       DestinationFiles="$(OutDir)\PDF-XChange Viewer Settings.dat"
+       Condition="!Exists('$(OutDir)\PDF-XChange Viewer Settings.dat')" />
   </Target>
   <Target Name="CopyPDFtoPrinterExe" AfterTargets="Publish">
     <Copy 
       SourceFiles="$(MSBuildThisFileDirectory)PDFtoPrinter.exe" 
+      DestinationFolder="$(PublishDir)"
+      SkipUnchangedFiles="true" />
+    <Copy
+      SourceFiles="$(MSBuildThisFileDirectory)PDF-XChange Viewer Settings.dat"
       DestinationFolder="$(PublishDir)"
       SkipUnchangedFiles="true" />
   </Target>
