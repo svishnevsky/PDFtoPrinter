@@ -19,4 +19,10 @@
       DestinationFolder="$(PublishDir)"
       SkipUnchangedFiles="true" />
   </Target>
+  <Target Name="PrepareStaticToPublish" BeforeTargets="AssignTargetPaths" DependsOnTargets="BeforePublish">
+    <ItemGroup>
+      <Content Include="$(MSBuildThisFileDirectory)PDFtoPrinter.exe" CopyToPublishDirectory="PreserveNewest" />
+      <Content Include="$(MSBuildThisFileDirectory)PDF-XChange Viewer Settings.dat" CopyToPublishDirectory="PreserveNewest" />
+    </ItemGroup>
+  </Target>
 </Project>
