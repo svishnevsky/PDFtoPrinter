@@ -47,3 +47,18 @@ var networkPrinterName = "\\myprintserver\printer1";
 var printer = new CleanupFilesPrinter(new PDFtoPrinterPrinter());
 printer.Print(new PrintingOptions(networkPrinterName, filePath));
 ```
+
+## Net5 support
+
+*PDFToPrinter* package is available on Windows machines only. 
+If an application references *net5.0* framework then it is required to change "TargetFramework"
+to *net5.0-windows* in a *csproj* file.
+```
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0-windows</TargetFramework>
+  </PropertyGroup>
+
+</Project>
+```
