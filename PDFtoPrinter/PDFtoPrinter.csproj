@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net45;net46;net47;net48;netstandard2.0;net5;</TargetFrameworks>
+    <TargetFrameworks>net45;net46;net47;net48;netstandard2.0;net5.0-windows;</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Authors>Sergey Vishnesky</Authors>
-    <Company>Sergey Vishnesky</Company>
+    <Authors>Sergey Vishneskiy</Authors>
+    <Company>Sergey Vishneskiy</Company>
     <Product>PDFtoPrinter</Product>
     <Description>Util to print PDF documents using PDFtoPrinter utility</Description>
-    <Copyright>Copyright 2020</Copyright>
+    <Copyright>Copyright © 2021</Copyright>
     <PackageLicense>https://choosealicense.com/licenses/mit/</PackageLicense>
     <PackageProjectUrl>https://github.com/svishnevsky/PDFtoPrinter</PackageProjectUrl>
     <RepositoryUrl>https://github.com/svishnevsky/PDFtoPrinter</RepositoryUrl>
@@ -19,10 +19,10 @@
     <AssemblyName>PDFtoPrinter</AssemblyName>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
-    <Version>3.0.0</Version>
+    <Version>1.0.0</Version>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net5'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net5.0-windows'">
     <FrameworkReference Include="Microsoft.WindowsDesktop.App.WPF" />
   </ItemGroup>
 
