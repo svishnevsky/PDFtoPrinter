@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2048
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFtoPrinter.Sample", "PDFtoPrinter.Sample\PDFtoPrinter.Sample.csproj", "{49AC8C60-231B-4715-8167-9B3B4EE5D1DC}"
 EndProject
@@ -11,7 +11,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFtoPrinter.Tests", "tests
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{892BAE76-70C0-4305-98DD-D373A6BACF68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFtoPrinter.NetCoreSample", "PDFtoPrinter.NetCoreSample\PDFtoPrinter.NetCoreSample.csproj", "{AB06ADC4-E61C-462C-AA3A-3E077182DA35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PDFtoPrinter.NetCoreSample", "PDFtoPrinter.NetCoreSample\PDFtoPrinter.NetCoreSample.csproj", "{AB06ADC4-E61C-462C-AA3A-3E077182DA35}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{83902079-ED90-471B-A352-00036CF6FE87}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
