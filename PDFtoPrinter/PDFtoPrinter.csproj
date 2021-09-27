@@ -39,6 +39,7 @@
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
     <Compile Remove="CleanupFilesPrinter.cs" />
+    <Compile Remove="QueuedFile.cs" />
   </ItemGroup>
 
   <ItemGroup>
