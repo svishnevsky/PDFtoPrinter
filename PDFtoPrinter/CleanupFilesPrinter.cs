@@ -14,10 +14,10 @@ namespace PDFtoPrinter
     /// </summary>
     public class CleanupFilesPrinter : IPrinter
     {
-        private static readonly IDictionary<string, ConcurrentQueue<string>> PrintingQueues =
-            new ConcurrentDictionary<string, ConcurrentQueue<string>>();
+        private static readonly IDictionary<string, ConcurrentQueue<QueuedFile>> PrintingQueues =
+            new ConcurrentDictionary<string, ConcurrentQueue<QueuedFile>>();
         private static readonly object Locker = new object();
-        private static readonly Timer CleanupTimer = new Timer(10 * 1000)
+        private static readonly Timer CleanupTimer = new Timer(1 * 1000)
         {
             AutoReset = true,
             Enabled = true
@@ -25,6 +25,7 @@ namespace PDFtoPrinter
         private static bool DeletingInProgress = false;
 
         private readonly IPrinter inner;
+        private readonly bool waitFileDeletion;
 
         static CleanupFilesPrinter()
         {
@@ -37,25 +38,37 @@ namespace PDFtoPrinter
         /// Creates new <see cref="CleanupFilesPrinter"/> instance.
         /// </summary>
         /// <param name="inner">The inner printer that will print files.</param>
-        public CleanupFilesPrinter(IPrinter inner)
+        /// <param name="waitFileDeletion">If "true" "Print" method will wait until a file is deleted.
+        /// The file will be deleted in background otherwise</param>
+        public CleanupFilesPrinter(
+            IPrinter inner,
+            bool waitFileDeletion = false)
         {
             this.inner = inner;
+            this.waitFileDeletion = waitFileDeletion;
         }
-        
+
         /// <inheritdoc/>
         public async Task Print(PrintingOptions options, TimeSpan? timeout = null)
         {
             await this.inner.Print(options, timeout);
-            this.EnqueuePrintingFile(options.PrinterName, options.FilePath);
+            Task task = this.EnqueuePrintingFile(options.PrinterName, options.FilePath);
+            if (this.waitFileDeletion)
+            {
+                await task;
+            }
         }
 
-        private void EnqueuePrintingFile(string printerName, string filePath)
+        private Task EnqueuePrintingFile(string printerName, string filePath)
         {
-            ConcurrentQueue<string> queue = this.GetQueue(printerName);
-            queue.Enqueue(filePath);
+            ConcurrentQueue<QueuedFile> queue = this.GetQueue(printerName);
+            var file = new QueuedFile(filePath);
+            queue.Enqueue(file);
+
+            return file.TaskCompletionSource.Task;
         }
 
-        private ConcurrentQueue<string> GetQueue(string printerName)
+        private ConcurrentQueue<QueuedFile> GetQueue(string printerName)
         {
             if (!PrintingQueues.ContainsKey(printerName))
             {
@@ -63,7 +76,7 @@ namespace PDFtoPrinter
                 {
                     if (!PrintingQueues.ContainsKey(printerName))
                     {
-                        PrintingQueues.Add(printerName, new ConcurrentQueue<string>());
+                        PrintingQueues.Add(printerName, new ConcurrentQueue<QueuedFile>());
                     }
                 }
             }
@@ -84,11 +97,11 @@ namespace PDFtoPrinter
         }
 
         private static void CleanupPrintedFiles(
-            IDictionary<string, ConcurrentQueue<string>> printingQueues)
+            IDictionary<string, ConcurrentQueue<QueuedFile>> printingQueues)
         {
             using (var printServer = new PrintServer())
             {
-                foreach (KeyValuePair<string, ConcurrentQueue<string>> queue
+                foreach (KeyValuePair<string, ConcurrentQueue<QueuedFile>> queue
                     in printingQueues)
                 {
                     DeletePrintedFiles(printServer, queue.Key, queue.Value);
@@ -99,7 +112,7 @@ namespace PDFtoPrinter
         private static void DeletePrintedFiles(
             PrintServer printServer,
             string queueName,
-            ConcurrentQueue<string> files)
+            ConcurrentQueue<QueuedFile> files)
         {
             using (PrintQueue printerQueue = printServer.GetPrintQueue(queueName))
             {
@@ -108,7 +121,7 @@ namespace PDFtoPrinter
         }
 
         private static void DeletePrintedFiles(
-            ConcurrentQueue<string> files,
+            ConcurrentQueue<QueuedFile> files,
             PrintQueue printerQueue)
         {
             var printingItems = new HashSet<string>(printerQueue
@@ -116,16 +129,17 @@ namespace PDFtoPrinter
                 .Select(x => x.Name.ToUpper()));
             while (!files.IsEmpty)
             {
-                files.TryPeek(out string currentFile);
-                if (printingItems.Contains(Path.GetFileName(currentFile).ToUpper()))
+                files.TryPeek(out QueuedFile currentFile);
+                if (printingItems.Contains(Path.GetFileName(currentFile.Path).ToUpper()))
                 {
                     break;
                 }
 
-                files.TryDequeue(out string dequeuedFile);
+                files.TryDequeue(out QueuedFile dequeuedFile);
                 try
                 {
-                    File.Delete(dequeuedFile);
+                    File.Delete(dequeuedFile.Path);
+                    dequeuedFile.TaskCompletionSource.SetResult(dequeuedFile.Path);
                 }
                 catch { }
             }
