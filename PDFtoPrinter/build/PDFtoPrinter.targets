@@ -1,9 +1,9 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Target Name="CopyResources" AfterTargets="Build">
     <Copy
-       SourceFiles="$(MSBuildThisFileDirectory)PDFtoPrinter.exe"
-       DestinationFiles="$(OutDir)\PDFtoPrinter.exe"
-       Condition="!Exists('$(OutDir)\PDFtoPrinter.exe')" />
+       SourceFiles="$(MSBuildThisFileDirectory)PDFtoPrinter_m.exe"
+       DestinationFiles="$(OutDir)\PDFtoPrinter_m.exe"
+       Condition="!Exists('$(OutDir)\PDFtoPrinter_m.exe')" />
     <Copy
        SourceFiles="$(MSBuildThisFileDirectory)PDF-XChange Viewer Settings.dat"
        DestinationFiles="$(OutDir)\PDF-XChange Viewer Settings.dat"
@@ -11,7 +11,7 @@
   </Target>
   <Target Name="CopyPDFtoPrinterExe" AfterTargets="Publish">
     <Copy 
-      SourceFiles="$(MSBuildThisFileDirectory)PDFtoPrinter.exe" 
+      SourceFiles="$(MSBuildThisFileDirectory)PDFtoPrinter_m.exe" 
       DestinationFolder="$(PublishDir)"
       SkipUnchangedFiles="true" />
     <Copy
@@ -21,7 +21,7 @@
   </Target>
   <Target Name="PrepareStaticToPublish" BeforeTargets="AssignTargetPaths" DependsOnTargets="BeforePublish">
     <ItemGroup>
-      <Content Include="$(MSBuildThisFileDirectory)PDFtoPrinter.exe" CopyToPublishDirectory="PreserveNewest" />
+      <Content Include="$(MSBuildThisFileDirectory)PDFtoPrinter_m.exe" CopyToPublishDirectory="PreserveNewest" />
       <Content Include="$(MSBuildThisFileDirectory)PDF-XChange Viewer Settings.dat" CopyToPublishDirectory="PreserveNewest" />
     </ItemGroup>
   </Target>

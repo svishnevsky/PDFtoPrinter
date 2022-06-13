@@ -5,7 +5,7 @@
 [![NuGet](https://img.shields.io/nuget/dt/PDFtoPrinter.svg)](https://www.nuget.org/packages/PDFtoPrinter/)
 [![Build status](https://vishnevsky.visualstudio.com/PDFtoPrinter/_apis/build/status/PDFtoPrinter%20Build)](https://vishnevsky.visualstudio.com/PDFtoPrinter/_build/latest?definitionId=1)
 
-The PDFtoPrinter project Allows to print PDF files uses [PDFtoPrinter](http://www.columbia.edu/~em36/pdftoprinter.html) util. The package contains PDFtoPrinter.exe and copys it to the output folder before build event. Also it provides PDFtoPrinterPrinter class that runs PDFtoPrinter.exe inside of a "Print" method in a separate process with default timeout 1 minute (the timeout can be overrited by 3rd argument). The "Print" method runs new PDFtoPrinter.exe instance per call. By default new printing will not start while the previous from the same PDFtoPrinterPrinter instance isn't completed. But you can use set concurrency level using constructor with arguments. 
+The PDFtoPrinter project Allows to print PDF files uses [PDFtoPrinter](http://www.columbia.edu/~em36/pdftoprinter.html) util. The package contains PDFtoPrinter_m.exe and copys it to the output folder before build event. Also it provides PDFtoPrinterPrinter class that runs PDFtoPrinter_m.exe inside of a "Print" method in a separate process with default timeout 1 minute (the timeout can be overrited by 3rd argument). The "Print" method runs new PDFtoPrinter_m.exe instance per call. By default new printing will not start while the previous from the same PDFtoPrinterPrinter instance isn't completed. But you can use set concurrency level using constructor with arguments. 
 
 *Note: Concurrency level works inside PDFtoPrinterPrinter instance.*
 
@@ -28,7 +28,7 @@ var printer = new PDFtoPrinterPrinter();
 printer.Print(new PrintingOptions(networkPrinterName, filePath), printTimeout);
 ```
 
-Use network printer with 5 concurrency printings. In this case up to 5 instances of PDFtoPrinter.exe will be started simultaneously
+Use network printer with 5 concurrency printings. In this case up to 5 instances of PDFtoPrinter_m.exe will be started simultaneously
 ```C#
 var filePath = "c:\path\to\pdf\file.pdf";
 var networkPrinterName = "\\myprintserver\printer1";

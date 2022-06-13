@@ -84,7 +84,7 @@ namespace PDFtoPrinter.Tests
                     Path.Combine(
                         Path.GetDirectoryName(
                             typeof(PDFtoPrinterPrinter).Assembly.Location),
-                        "PDFtoPrinter.exe"),
+                        "PDFtoPrinter_m.exe"),
                     new PrintingOptions(PrinterName, FilePath)))
                 .Returns(process);
             return processFactory.Object;

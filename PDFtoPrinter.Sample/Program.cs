@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace PDFtoPrinter.Sample
 {
@@ -6,10 +8,11 @@ namespace PDFtoPrinter.Sample
     {
         private static void Main(string[] args)
         {
-            var wrapper = new CleanupFilesPrinter(new PDFtoPrinterPrinter(), true);
-            wrapper
-                .Print(new PrintingOptions("Microsoft Print to PDF", "somefile.pdf"))
-                .Wait();
+            var wrapper = new PDFtoPrinterPrinter(5);
+            Task.WaitAll(Enumerable
+                .Range(0, 5)
+                .Select(x => wrapper.Print(new PrintingOptions("Microsoft Print to PDF", "somefile.pdf")))
+                .ToArray());
             Console.ReadKey();
         }
     }
