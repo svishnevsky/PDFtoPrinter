@@ -12,7 +12,7 @@ namespace PDFtoPrinter
     /// </summary>
     public class PDFtoPrinterPrinter : IPrinter
     {
-        private const string UtilName = "PDFtoPrinter.exe";
+        private const string UtilName = "PDFtoPrinter_m.exe";
         private static readonly string UtilPath = GetUtilPath(UtilName);
         private static readonly TimeSpan PrintTimeout = new TimeSpan(0, 1, 0);
 
