@@ -87,10 +87,14 @@ namespace PDFtoPrinter
 
         private static string GetUtilPath(string utilName)
         {
-            return Path.Combine(
-                Path.GetDirectoryName(
-                    (Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly()).Location),
-                utilName);
+            // Fallback logic is required to support all CLR versions.
+            string utilLocation = Path.Combine(AppContext.BaseDirectory, utilName);
+
+            return File.Exists(utilLocation)
+                ? utilLocation
+                : Path.Combine(
+                    Path.GetDirectoryName((Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly()).Location),
+                    utilName);
         }
     }
 }
