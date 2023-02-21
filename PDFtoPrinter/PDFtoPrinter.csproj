@@ -7,7 +7,7 @@
     <Company>Sergey Vishneskiy</Company>
     <Product>PDFtoPrinter</Product>
     <Description>Util to print PDF documents using PDFtoPrinter utility</Description>
-    <Copyright>Copyright © 2022</Copyright>
+    <Copyright>Copyright © 2023</Copyright>
     <PackageLicense>https://choosealicense.com/licenses/mit/</PackageLicense>
     <PackageProjectUrl>https://github.com/svishnevsky/PDFtoPrinter</PackageProjectUrl>
     <RepositoryUrl>https://github.com/svishnevsky/PDFtoPrinter</RepositoryUrl>
