@@ -1,19 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net45;net46;net47;net48;netstandard2.0;net5.0-windows;net6.0-windows;</TargetFrameworks>
+    <TargetFrameworks>net46;net47;net48;netstandard2.0;net5.0-windows;net6.0-windows;net7.0-windows;</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Sergey Vishneskiy</Authors>
     <Company>Sergey Vishneskiy</Company>
     <Product>PDFtoPrinter</Product>
     <Description>Util to print PDF documents using PDFtoPrinter utility</Description>
-    <Copyright>Copyright © 2022</Copyright>
+    <Copyright>Copyright © 2023</Copyright>
     <PackageLicense>https://choosealicense.com/licenses/mit/</PackageLicense>
     <PackageProjectUrl>https://github.com/svishnevsky/PDFtoPrinter</PackageProjectUrl>
     <RepositoryUrl>https://github.com/svishnevsky/PDFtoPrinter</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>PDF Printing</PackageTags>
-    <PackageReleaseNotes>Prevent JS running</PackageReleaseNotes>
+    <PackageReleaseNotes>Add dotnet 7 support.</PackageReleaseNotes>
     <PackageId>PDFtoPrinter</PackageId>
     <RootNamespace>PDFtoPrinter</RootNamespace>
     <AssemblyName>PDFtoPrinter</AssemblyName>
