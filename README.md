@@ -48,16 +48,16 @@ var printer = new CleanupFilesPrinter(new PDFtoPrinterPrinter());
 printer.Print(new PrintingOptions(networkPrinterName, filePath));
 ```
 
-## Net5 support
+## dotnet support
 
 *PDFToPrinter* package is available on Windows machines only. 
-If an application references *net5.0* framework then it is required to change "TargetFramework"
-to *net5.0-windows* in a *csproj* file.
+If an application references *net5.0* framework and later then it is required to change "TargetFramework"
+to *net[version].0-windows* in a *csproj* file. E.g.
 ```
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
   </PropertyGroup>
 
 </Project>

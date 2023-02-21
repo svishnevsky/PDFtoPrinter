@@ -21,7 +21,7 @@ namespace PDFtoPrinter.Tests
             ArgumentException exception = Assert.ThrowsException<ArgumentException>(
                 () => new PDFtoPrinterPrinter(maxCuncurrency));
             Assert.AreEqual(
-                "Value should be greater than zero.\r\nParameter name: maxConcurrentPrintings",
+                "Value should be greater than zero. (Parameter 'maxConcurrentPrintings')",
                 exception.Message);
         }
 
