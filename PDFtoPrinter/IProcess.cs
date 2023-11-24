@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 
 namespace PDFtoPrinter
 {
@@ -24,8 +23,8 @@ namespace PDFtoPrinter
         /// <summary>
         /// Waits until the process is completed.
         /// </summary>
-        /// <param name="timeout">Wait timeout.</param>
+        /// <param name="timeout">Wait timeout in milliseconds.</param>
         /// <returns>true if the process completed, false otherwise.</returns>
-        Task<bool> WaitForExitAsync(TimeSpan timeout);
+        bool WaitForExit(int timeout);
     }
 }
