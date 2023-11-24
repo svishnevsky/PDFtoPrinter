@@ -21,7 +21,8 @@ namespace PDFtoPrinter
         }
 
         /// <summary>
-        /// Name of the printer (if the printer is network, use network format e.g. "\\printmachine\defaultprinter").
+        /// Name of the printer (if the printer is network,
+        /// use network format e.g. "\\printmachine\defaultprinter").
         /// </summary>
         public string PrinterName { get; }
 
@@ -33,7 +34,8 @@ namespace PDFtoPrinter
         /// <summary>
         /// Page range for printing.
         /// Separate multiple page ranges with commas (no spaces) like this: 2-4,7,12 
-        /// or, to specify all pages after a specific page, use its number followed by a hyphen, like this: 7-
+        /// or, to specify all pages after a specific page,
+        /// use its number followed by a hyphen, like this: 7-
         /// </summary>
         public string Pages { get; set; }
 
@@ -56,21 +58,28 @@ namespace PDFtoPrinter
         public virtual bool Equals(PrintingOptions other)
         {
             return other != null &&
-                   this.PrinterName == other.PrinterName &&
-                   this.FilePath == other.FilePath &&
-                   this.Pages == other.Pages &&
-                   EqualityComparer<uint?>.Default.Equals(this.Copies, other.Copies) &&
-                   this.Focus == other.Focus;
+                this.PrinterName == other.PrinterName &&
+                this.FilePath == other.FilePath &&
+                this.Pages == other.Pages &&
+                EqualityComparer<uint?>.Default.Equals(this.Copies, other.Copies) &&
+                this.Focus == other.Focus;
         }
 
         public override int GetHashCode()
         {
+            const int HashBase = -1521134295;
             int hashCode = -1936359086;
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(this.PrinterName);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(this.FilePath);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(this.Pages);
-            hashCode = hashCode * -1521134295 + EqualityComparer<uint?>.Default.GetHashCode(this.Copies);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(this.Focus);
+            hashCode = (hashCode * HashBase) + EqualityComparer<string>.Default
+                .GetHashCode(this.PrinterName);
+            hashCode = (hashCode * HashBase) + EqualityComparer<string>.Default
+                .GetHashCode(this.FilePath);
+            hashCode = (hashCode * HashBase) + EqualityComparer<string>.Default
+                .GetHashCode(this.Pages);
+            hashCode = (hashCode * HashBase) + EqualityComparer<uint?>.Default
+                .GetHashCode(this.Copies);
+            hashCode = (hashCode * HashBase) + EqualityComparer<string>.Default
+                .GetHashCode(this.Focus);
+
             return hashCode;
         }
 
@@ -80,11 +89,11 @@ namespace PDFtoPrinter
                 " ",
                 new[]
                 {
-                    this.FilePath.Format(x => $"\"{x}\""),
-                    this.PrinterName.Format(x => $"\"{x}\""),
-                    this.Pages.Format(x => $"pages={x}"),
-                    this.Copies?.ToString().Format(x => $"copies={x}"),
-                    this.Focus.Format(x => $"focus=\"{x}\"")
+                this.FilePath.Format(x => $"\"{x}\""),
+                this.PrinterName.Format(x => $"\"{x}\""),
+                this.Pages.Format(x => $"pages={x}"),
+                this.Copies?.ToString().Format(x => $"copies={x}"),
+                this.Focus.Format(x => $"focus=\"{x}\"")
                 }
                 .Where(x => !string.IsNullOrEmpty(x)));
         }

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net46;net47;net48;netstandard2.0;net5.0-windows;net6.0-windows;net7.0-windows;</TargetFrameworks>
+    <TargetFrameworks>net46;net47;net48;netstandard2.0;net5.0-windows;net6.0-windows;net7.0-windows;net8.0-windows;</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Sergey Vishneskiy</Authors>
     <Company>Sergey Vishneskiy</Company>
@@ -13,13 +13,20 @@
     <RepositoryUrl>https://github.com/svishnevsky/PDFtoPrinter</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>PDF Printing</PackageTags>
-    <PackageReleaseNotes>Add dotnet 7 support.</PackageReleaseNotes>
+    <PackageReleaseNotes>Fix process cancellation for web apps.</PackageReleaseNotes>
     <PackageId>PDFtoPrinter</PackageId>
     <RootNamespace>PDFtoPrinter</RootNamespace>
     <AssemblyName>PDFtoPrinter</AssemblyName>
+    <LangVersion>7.3</LangVersion>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
     <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug' ">
+    <AssemblyVersion>1000.0.0.0</AssemblyVersion>
+    <FileVersion>1000.0.0.0</FileVersion>
+    <Version>1000.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup Condition="$(TargetFramework.EndsWith('-windows'))">
