@@ -70,9 +70,7 @@ namespace PDFtoPrinter
                 using (IProcess proc = this.processFactory.Create(utilPath, options))
                 {
                     proc.Start();
-                    bool result = await proc
-                        .WaitForExitAsync(timeout ?? printTimeout)
-                        .ConfigureAwait(false);
+                    bool result = proc.WaitForExit((int)(timeout ?? printTimeout).TotalMilliseconds);
                     if (!result)
                     {
                         proc.Kill();
