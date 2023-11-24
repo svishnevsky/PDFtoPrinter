@@ -14,7 +14,7 @@ namespace PDFtoPrinter
                 {
                     WindowStyle = ProcessWindowStyle.Hidden,
                     FileName = executablePath,
-                    Arguments = options.ToString(),
+                    Arguments = $"{options} /s",
                     UseShellExecute = false,
                     CreateNoWindow = true
                 }

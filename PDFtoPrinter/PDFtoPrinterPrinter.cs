@@ -13,8 +13,8 @@ namespace PDFtoPrinter
     public class PDFtoPrinterPrinter : IPrinter
     {
         private const string UtilName = "PDFtoPrinter_m.exe";
-        private static readonly string UtilPath = GetUtilPath(UtilName);
-        private static readonly TimeSpan PrintTimeout = new TimeSpan(0, 1, 0);
+        private static readonly string utilPath = GetUtilPath(UtilName);
+        private static readonly TimeSpan printTimeout = new TimeSpan(0, 1, 0);
 
         private readonly SemaphoreSlim semaphore;
         private readonly IProcessFactory processFactory;
@@ -32,10 +32,10 @@ namespace PDFtoPrinter
         /// <summary>
         /// Creates new <see cref="PDFtoPrinterPrinter"/> instance with concurrent printing.
         /// </summary>
-        /// <param name="maxConcurrentPrintings">Max count of cuncurrent printings.</param>
+        /// <param name="maxConcurrentPrintings">Max count of concurrent printings.</param>
         /// <param name="processFactory"><see cref="IProcessFactory"/> instance.</param>
         /// <exception cref="ArgumentException">
-        /// Thows an exception if <paramref name="maxConcurrentPrintings"/> less or equals 0.
+        /// Throws an exception if <paramref name="maxConcurrentPrintings"/> less or equals 0.
         /// </exception>
         public PDFtoPrinterPrinter(
             int maxConcurrentPrintings,
@@ -67,11 +67,11 @@ namespace PDFtoPrinter
             await this.semaphore.WaitAsync().ConfigureAwait(false);
             try
             {
-                using (IProcess proc = this.processFactory.Create(UtilPath, options))
+                using (IProcess proc = this.processFactory.Create(utilPath, options))
                 {
                     proc.Start();
                     bool result = await proc
-                        .WaitForExitAsync(timeout ?? PrintTimeout)
+                        .WaitForExitAsync(timeout ?? printTimeout)
                         .ConfigureAwait(false);
                     if (!result)
                     {

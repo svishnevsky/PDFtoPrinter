@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31005.135
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFtoPrinter.Sample", "PDFtoPrinter.Sample\PDFtoPrinter.Sample.csproj", "{49AC8C60-231B-4715-8167-9B3B4EE5D1DC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PDFtoPrinter", "PDFtoPrinter\PDFtoPrinter.csproj", "{31FC7040-0FFF-450D-BBF5-0E2EE663787C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFtoPrinter.Tests", "tests\PDFtoPrinter.Tests\PDFtoPrinter.Tests.csproj", "{DD63F45D-4E26-48D9-B2F2-986940D51F10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PDFtoPrinter.Tests", "tests\PDFtoPrinter.Tests\PDFtoPrinter.Tests.csproj", "{DD63F45D-4E26-48D9-B2F2-986940D51F10}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{892BAE76-70C0-4305-98DD-D373A6BACF68}"
 EndProject
@@ -20,6 +20,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFtoPrinter.Wpf", "PDFtoPrinter.Wpf\PDFtoPrinter.Wpf.csproj", "{63E3483D-06C5-42E3-AEAC-FD1D19685F79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFtoPrinter.WebApi", "PDFtoPrinter.WebApi\PDFtoPrinter.WebApi.csproj", "{C4FAE385-BB34-49E5-AE8A-5E122D3190F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +47,14 @@ Global
 		{AB06ADC4-E61C-462C-AA3A-3E077182DA35}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB06ADC4-E61C-462C-AA3A-3E077182DA35}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB06ADC4-E61C-462C-AA3A-3E077182DA35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63E3483D-06C5-42E3-AEAC-FD1D19685F79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63E3483D-06C5-42E3-AEAC-FD1D19685F79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63E3483D-06C5-42E3-AEAC-FD1D19685F79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63E3483D-06C5-42E3-AEAC-FD1D19685F79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4FAE385-BB34-49E5-AE8A-5E122D3190F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4FAE385-BB34-49E5-AE8A-5E122D3190F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4FAE385-BB34-49E5-AE8A-5E122D3190F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4FAE385-BB34-49E5-AE8A-5E122D3190F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

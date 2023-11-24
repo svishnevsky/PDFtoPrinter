@@ -13,6 +13,7 @@ indent_style = space
 indent_size = 4
 insert_final_newline = true
 charset = utf-8-bom
+guidelines = 80 1px dotted cyan, 100 2px solid cyan
 
 # XML project files
 [*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,projitems,shproj}]
@@ -88,15 +89,15 @@ dotnet_naming_symbols.constants.required_modifiers = const
 
 dotnet_naming_style.constant_style.capitalization = pascal_case
 
-# Static fields are PascalCase
-dotnet_naming_rule.static_fields_should_be_pascal_case.severity = suggestion
-dotnet_naming_rule.static_fields_should_be_pascal_case.symbols = static_fields
-dotnet_naming_rule.static_fields_should_be_pascal_case.style = static_field_style
+# Static fields are camelCase
+dotnet_naming_rule.static_fields_should_be_camel_case.severity = suggestion
+dotnet_naming_rule.static_fields_should_be_camel_case.symbols = static_fields
+dotnet_naming_rule.static_fields_should_be_camel_case.style = static_field_style
 
 dotnet_naming_symbols.static_fields.applicable_kinds = field
 dotnet_naming_symbols.static_fields.required_modifiers = static
 
-dotnet_naming_style.static_field_style.capitalization = pascal_case
+dotnet_naming_style.static_field_style.capitalization = camel_case
 
 # Instance fields are camelCase
 dotnet_naming_rule.instance_fields_should_be_camel_case.severity = suggestion
@@ -174,6 +175,8 @@ csharp_style_pattern_matching_over_as_with_null_check = true:suggestion
 csharp_style_inlined_variable_declaration = true:suggestion
 csharp_style_throw_expression = true:suggestion
 csharp_style_conditional_delegate_call = true:suggestion
+csharp_style_unused_value_expression_statement_preference = false
+csharp_style_unused_value_assignment_preference = false
 
 # Space preferences
 csharp_space_after_cast = false
@@ -203,3 +206,7 @@ csharp_space_between_square_brackets = false
 csharp_prefer_braces = true:suggestion
 csharp_preserve_single_line_blocks = true
 csharp_preserve_single_line_statements = true
+
+# Namespace declaration and using placement
+csharp_style_namespace_declarations = file_scoped:warning
+csharp_using_directive_placement = outside_namespace

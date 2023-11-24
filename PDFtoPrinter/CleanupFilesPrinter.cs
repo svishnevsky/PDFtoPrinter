@@ -10,27 +10,29 @@ using System.Timers;
 namespace PDFtoPrinter
 {
     /// <summary>
-    /// Deletes files after printing. Doesn't print files by itselves but use inner printer.
+    /// Deletes files after printing. Doesn't print files by it selves but use inner printer.
     /// </summary>
     public class CleanupFilesPrinter : IPrinter
     {
-        private static readonly IDictionary<string, ConcurrentQueue<QueuedFile>> PrintingQueues =
+        public delegate void OnCleanupFailedHandler(QueuedFile file, Exception exception);
+        public static event OnCleanupFailedHandler OnCleanupFailed;
+        private static readonly IDictionary<string, ConcurrentQueue<QueuedFile>> printingQueues =
             new ConcurrentDictionary<string, ConcurrentQueue<QueuedFile>>();
-        private static readonly object Locker = new object();
-        private static readonly Timer CleanupTimer = new Timer(1 * 1000)
+        private static readonly object locker = new object();
+        private static readonly Timer cleanupTimer = new Timer(1 * 1000)
         {
             AutoReset = true,
             Enabled = true
         };
-        private static bool DeletingInProgress = false;
+        private static bool deletingInProgress = false;
 
         private readonly IPrinter inner;
         private readonly bool waitFileDeletion;
 
         static CleanupFilesPrinter()
         {
-            CleanupTimer.Elapsed += CleanupTimerElapsed;
-            CleanupTimer.Enabled = true;
+            cleanupTimer.Elapsed += CleanupTimerElapsed;
+            cleanupTimer.Enabled = true;
         }
 
 
@@ -52,48 +54,48 @@ namespace PDFtoPrinter
         public async Task Print(PrintingOptions options, TimeSpan? timeout = null)
         {
             await this.inner.Print(options, timeout);
-            Task task = this.EnqueuePrintingFile(options.PrinterName, options.FilePath);
+            Task task = EnqueuePrintingFile(options.PrinterName, options.FilePath);
             if (this.waitFileDeletion)
             {
                 await task;
             }
         }
 
-        private Task EnqueuePrintingFile(string printerName, string filePath)
+        private static Task EnqueuePrintingFile(string printerName, string filePath)
         {
-            ConcurrentQueue<QueuedFile> queue = this.GetQueue(printerName);
+            ConcurrentQueue<QueuedFile> queue = GetQueue(printerName);
             var file = new QueuedFile(filePath);
             queue.Enqueue(file);
 
             return file.TaskCompletionSource.Task;
         }
 
-        private ConcurrentQueue<QueuedFile> GetQueue(string printerName)
+        private static ConcurrentQueue<QueuedFile> GetQueue(string printerName)
         {
-            if (!PrintingQueues.ContainsKey(printerName))
+            if (!printingQueues.ContainsKey(printerName))
             {
-                lock (Locker)
+                lock (locker)
                 {
-                    if (!PrintingQueues.ContainsKey(printerName))
+                    if (!printingQueues.ContainsKey(printerName))
                     {
-                        PrintingQueues.Add(printerName, new ConcurrentQueue<QueuedFile>());
+                        printingQueues.Add(printerName, new ConcurrentQueue<QueuedFile>());
                     }
                 }
             }
 
-            return PrintingQueues[printerName];
+            return printingQueues[printerName];
         }
 
         private static void CleanupTimerElapsed(object sender, ElapsedEventArgs e)
         {
-            if (DeletingInProgress)
+            if (deletingInProgress)
             {
                 return;
             }
 
-            DeletingInProgress = true;
-            CleanupPrintedFiles(PrintingQueues);
-            DeletingInProgress = false;
+            deletingInProgress = true;
+            CleanupPrintedFiles(printingQueues);
+            deletingInProgress = false;
         }
 
         private static void CleanupPrintedFiles(
@@ -141,7 +143,10 @@ namespace PDFtoPrinter
                     File.Delete(dequeuedFile.Path);
                     dequeuedFile.TaskCompletionSource.SetResult(dequeuedFile.Path);
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    OnCleanupFailed?.Invoke(dequeuedFile, ex);
+                }
             }
         }
     }

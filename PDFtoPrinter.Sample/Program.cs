@@ -10,8 +10,10 @@ namespace PDFtoPrinter.Sample
         {
             var wrapper = new PDFtoPrinterPrinter(5);
             Task.WaitAll(Enumerable
-                .Range(0, 5)
-                .Select(x => wrapper.Print(new PrintingOptions("Microsoft Print to PDF", "somefile.pdf")))
+                .Range(0, 7)
+                .Select(x => wrapper.Print(new PrintingOptions(
+                    "Microsoft Print to PDF",
+                    "somefile.pdf")))
                 .ToArray());
             Console.ReadKey();
         }
