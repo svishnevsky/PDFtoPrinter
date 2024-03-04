@@ -13,7 +13,7 @@ Sample usage:
 
 Use local printer
 ```C#
-var filePath = "c:\path\to\pdf\file.pdf";
+var filePath = @"c:\path\to\pdf\file.pdf";
 var printerName = "Vendor Color Printer Name";
 var printer = new PDFtoPrinterPrinter();
 printer.Print(new PrintingOptions(printerName, filePath));
@@ -21,8 +21,8 @@ printer.Print(new PrintingOptions(printerName, filePath));
 
 Use network printer with timeout
 ```C#
-var filePath = "c:\path\to\pdf\file.pdf";
-var networkPrinterName = "\\myprintserver\printer1";
+var filePath = @"c:\path\to\pdf\file.pdf";
+var networkPrinterName = @"\\myprintserver\printer1";
 var printTimeout = new TimeSpan(0, 30, 0);
 var printer = new PDFtoPrinterPrinter();
 printer.Print(new PrintingOptions(networkPrinterName, filePath), printTimeout);
@@ -30,8 +30,8 @@ printer.Print(new PrintingOptions(networkPrinterName, filePath), printTimeout);
 
 Use network printer with 5 concurrency printings. In this case up to 5 instances of PDFtoPrinter_m.exe will be started simultaneously
 ```C#
-var filePath = "c:\path\to\pdf\file.pdf";
-var networkPrinterName = "\\myprintserver\printer1";
+var filePath = @"c:\path\to\pdf\file.pdf";
+var networkPrinterName = @"\\myprintserver\printer1";
 var allowedCocurrentPrintings = 5;
 var printer = new PDFtoPrinterPrinter(allowedCocurrentPrintings);
 for (var i = 0; i < 10; i++)
@@ -42,8 +42,8 @@ for (var i = 0; i < 10; i++)
 
 If you need to delete files after printing you can use "CleanupFilesPrinter":
 ```C#
-var filePath = "c:\path\to\pdf\file.pdf";
-var networkPrinterName = "\\myprintserver\printer1";
+var filePath = @"c:\path\to\pdf\file.pdf";
+var networkPrinterName = @"\\myprintserver\printer1";
 var printer = new CleanupFilesPrinter(new PDFtoPrinterPrinter());
 printer.Print(new PrintingOptions(networkPrinterName, filePath));
 ```
