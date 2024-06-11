@@ -31,9 +31,11 @@ namespace PDFtoPrinter
         /// </summary>
         public string FilePath { get; }
 
+        public bool EnableCSV { get; set; }
+
         /// <summary>
         /// Page range for printing.
-        /// Separate multiple page ranges with commas (no spaces) like this: 2-4,7,12 
+        /// Separate multiple page ranges with commas (no spaces) like this: 2-4,7,12
         /// or, to specify all pages after a specific page,
         /// use its number followed by a hyphen, like this: 7-
         /// </summary>
@@ -93,7 +95,8 @@ namespace PDFtoPrinter
                 this.PrinterName.Format(x => $"\"{x}\""),
                 this.Pages.Format(x => $"pages={x}"),
                 this.Copies?.ToString().Format(x => $"copies={x}"),
-                this.Focus.Format(x => $"focus=\"{x}\"")
+                this.Focus.Format(x => $"focus=\"{x}\""),
+                this.EnableCSV ? "/csv" : ""
                 }
                 .Where(x => !string.IsNullOrEmpty(x)));
         }
