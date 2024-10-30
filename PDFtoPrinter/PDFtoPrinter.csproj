@@ -1,67 +1,67 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>net46;net47;net48;netstandard2.0;net5.0-windows;net6.0-windows;net7.0-windows;net8.0-windows;</TargetFrameworks>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Authors>Sergey Vishneskiy</Authors>
-    <Company>Sergey Vishneskiy</Company>
-    <Product>PDFtoPrinter</Product>
-    <Description>Util to print PDF documents using PDFtoPrinter utility</Description>
-    <Copyright>Copyright © 2023</Copyright>
-    <PackageLicense>https://choosealicense.com/licenses/mit/</PackageLicense>
-    <PackageProjectUrl>https://github.com/svishnevsky/PDFtoPrinter</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/svishnevsky/PDFtoPrinter</RepositoryUrl>
-    <RepositoryType>Git</RepositoryType>
-    <PackageTags>PDF Printing</PackageTags>
-    <PackageReleaseNotes>Fix process cancellation for web apps.</PackageReleaseNotes>
-    <PackageId>PDFtoPrinter</PackageId>
-    <RootNamespace>PDFtoPrinter</RootNamespace>
-    <AssemblyName>PDFtoPrinter</AssemblyName>
-    <LangVersion>7.3</LangVersion>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
-    <Version>1.0.0</Version>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFrameworks>net46;net47;net48;netstandard2.0;net5.0;net6.0;net7.0;net8.0;</TargetFrameworks>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Authors>Sergey Vishneskiy, Morabaa Software Solutions, LTD.</Authors>
+        <Company>Sergey Vishneskiy</Company>
+        <Product>PDFtoPrinter</Product>
+        <Description>Util to print PDF documents using PDFtoPrinter (for windows) and lp (for macOS) utility</Description>
+        <Copyright>Copyright © 2024</Copyright>
+        <PackageLicense>https://choosealicense.com/licenses/mit/</PackageLicense>
+        <PackageProjectUrl>https://github.com/svishnevsky/PDFtoPrinter</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/svishnevsky/PDFtoPrinter</RepositoryUrl>
+        <RepositoryType>Git</RepositoryType>
+        <PackageTags>PDF Printing</PackageTags>
+        <PackageReleaseNotes>Support macOS</PackageReleaseNotes>
+        <PackageId>PDFtoPrinter</PackageId>
+        <RootNamespace>PDFtoPrinter</RootNamespace>
+        <AssemblyName>PDFtoPrinter</AssemblyName>
+        <LangVersion>7.3</LangVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <FileVersion>1.1.0.0</FileVersion>
+        <Version>1.1.0</Version>
+    </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)' == 'Debug' ">
-    <AssemblyVersion>1000.0.0.0</AssemblyVersion>
-    <FileVersion>1000.0.0.0</FileVersion>
-    <Version>1000.0.0</Version>
-  </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)' == 'Debug' ">
+        <AssemblyVersion>1000.0.0.0</AssemblyVersion>
+        <FileVersion>1000.0.0.0</FileVersion>
+        <Version>1000.0.0</Version>
+    </PropertyGroup>
 
-  <ItemGroup Condition="$(TargetFramework.EndsWith('-windows'))">
-    <FrameworkReference Include="Microsoft.WindowsDesktop.App.WPF" />
-  </ItemGroup>
+    <ItemGroup Condition="$(TargetFramework.EndsWith('-windows'))">
+        <FrameworkReference Include="Microsoft.WindowsDesktop.App.WPF" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <None Include="build\*.*">
-      <Pack>true</Pack>
-      <PackagePath>build</PackagePath>
-    </None>
-  </ItemGroup>
+    <ItemGroup>
+        <None Include="build\*.*">
+            <Pack>true</Pack>
+            <PackagePath>build</PackagePath>
+        </None>
+    </ItemGroup>
 
-  <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">
-    <Reference Include="System.Printing" />
-  </ItemGroup>
+    <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">
+        <Reference Include="System.Printing" />
+    </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-    <Compile Remove="CleanupFilesPrinter.cs" />
-    <Compile Remove="QueuedFile.cs" />
-  </ItemGroup>
+    <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+        <Compile Remove="CleanupFilesPrinter.cs" />
+        <Compile Remove="QueuedFile.cs" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="ErrorMessages.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ErrorMessages.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
+    <ItemGroup>
+        <Compile Update="ErrorMessages.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>ErrorMessages.resx</DependentUpon>
+        </Compile>
+    </ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="ErrorMessages.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Update="ErrorMessages.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+    </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if WINDOWS
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
@@ -151,3 +152,18 @@ namespace PDFtoPrinter
         }
     }
 }
+#else
+using System;
+using System.Threading.Tasks;
+
+namespace PDFtoPrinter
+{
+    public class CleaupFilesPrinter : IPrinter
+    {
+        public Task Print(PrintingOptions options, TimeSpan? timeout = null)
+        {
+            throw new PlatformNotSupportedException();
+        }
+    }
+}
+#endif
