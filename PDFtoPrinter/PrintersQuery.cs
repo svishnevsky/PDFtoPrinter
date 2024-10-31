@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace PDFtoPrinter
 {
-    public sealed class GetPrinters
+    public sealed class PrintersQuery
     {
-        public static async Task<PrinterResponse[]> HandleAsync()
+        public static async Task<PrinterResponse[]> RunAsync()
         {
             var printers = new List<PrinterResponse>();
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
