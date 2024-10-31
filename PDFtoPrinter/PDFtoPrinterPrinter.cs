@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,13 +13,8 @@ namespace PDFtoPrinter
     /// </summary>
     public class PDFtoPrinterPrinter : IPrinter
     {
-#if WINDOWS
-        private const string UtilName = "PDFtoPrinter_m.exe";
-        private static readonly string utilPath = GetUtilPath(UtilName);
-#else
-        private const string UtilName = "lp";
-        private static readonly string utilPath = GetUtilPath(UtilName);
-#endif
+        private static readonly string utilName = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "PDFtoPrinter_m.exe" : "lp";
+        private static readonly string utilPath = GetUtilPath(utilName);
         private static readonly TimeSpan printTimeout = new TimeSpan(0, 1, 0);
 
         private readonly SemaphoreSlim semaphore;
@@ -90,16 +86,17 @@ namespace PDFtoPrinter
 
         private static string GetUtilPath(string utilName)
         {
-#if WINDOWS
-            // Fallback logic is required to support all CLR versions.
-            string utilLocation = Path.Combine(AppContext.BaseDirectory, utilName);
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                // Fallback logic is required to support all CLR versions.
+                string utilLocation = Path.Combine(AppContext.BaseDirectory, utilName);
 
-            return File.Exists(utilLocation)
-                ? utilLocation
-                : Path.Combine(
-                    Path.GetDirectoryName((Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly()).Location),
-                    utilName);
-#else
+                return File.Exists(utilLocation)
+                    ? utilLocation
+                    : Path.Combine(
+                        Path.GetDirectoryName((Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly()).Location),
+                        utilName);
+            }
             if (Path.IsPathRooted(utilName))
             {
                 return utilName;
@@ -115,7 +112,6 @@ namespace PDFtoPrinter
                 return defaultPath;
             }
             return utilName;
-#endif
         }
     }
 }
