@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace PDFtoPrinter
 {
@@ -8,19 +10,20 @@ namespace PDFtoPrinter
         /// <inheritdoc/>
         public IProcess Create(string executablePath, PrintingOptions options)
         {
-#if WINDOWS
-            return new Process
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && Environment.GetEnvironmentVariable("USE_LP") != "true")
             {
-                StartInfo =
+                return new Process
                 {
-                    WindowStyle = ProcessWindowStyle.Hidden,
-                    FileName = executablePath,
-                    Arguments = $"{options} /s",
-                    UseShellExecute = false,
-                    CreateNoWindow = true
-                }
-            };
-#else
+                    StartInfo =
+                    {
+                        WindowStyle = ProcessWindowStyle.Hidden,
+                        FileName = executablePath,
+                        Arguments = $"{options} /s",
+                        UseShellExecute = false,
+                        CreateNoWindow = true
+                    }
+                };
+            }
             string args = "";
             if (!string.IsNullOrWhiteSpace(options.PrinterName))
             {
@@ -53,6 +56,5 @@ namespace PDFtoPrinter
                 }
             };
         }
-#endif
     }
 }
