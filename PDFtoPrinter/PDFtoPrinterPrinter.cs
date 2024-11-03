@@ -13,7 +13,11 @@ namespace PDFtoPrinter
     /// </summary>
     public class PDFtoPrinterPrinter : IPrinter
     {
+#if NET48_OR_GREATER || NET6_0_OR_GREATER
         private static readonly string utilName = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "PDFtoPrinter_m.exe" : "lp";
+#else 
+        private static readonly string utilName = "PDFtoPrinter_m.exe";
+#endif
         private static readonly string utilPath = GetUtilPath(utilName);
         private static readonly TimeSpan printTimeout = new TimeSpan(0, 1, 0);
 
@@ -86,7 +90,9 @@ namespace PDFtoPrinter
 
         private static string GetUtilPath(string utilName)
         {
+#if NET48_OR_GREATER || NET6_0_OR_GREATER
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+#endif
             {
                 // Fallback logic is required to support all CLR versions.
                 string utilLocation = Path.Combine(AppContext.BaseDirectory, utilName);

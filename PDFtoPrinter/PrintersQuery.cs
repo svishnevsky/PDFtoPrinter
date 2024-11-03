@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -11,6 +12,10 @@ namespace PDFtoPrinter
     {
         public static async Task<PrinterResponse[]> RunAsync()
         {
+#if NET45_OR_GREATER && !NET48_OR_GREATER
+            // until a better solution is found for net45 and net46
+            throw new NotImplementedException();
+#else
             var printers = new List<PrinterResponse>();
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
@@ -46,6 +51,7 @@ namespace PDFtoPrinter
             }
 
             return printers.ToArray();
+#endif
         }
     }
 

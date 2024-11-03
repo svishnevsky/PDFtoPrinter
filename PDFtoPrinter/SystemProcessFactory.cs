@@ -10,7 +10,9 @@ namespace PDFtoPrinter
         /// <inheritdoc/>
         public IProcess Create(string executablePath, PrintingOptions options)
         {
+#if !NET45_OR_GREATER && !NET48_OR_GREATER
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && Environment.GetEnvironmentVariable("USE_LP") != "true")
+#endif
             {
                 return new Process
                 {
