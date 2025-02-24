@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net46;net47;net48;netstandard2.0;net6.0;net7.0;net8.0;</TargetFrameworks>
+        <TargetFrameworks>net46;net47;net48;netstandard2.0;net6.0;net6.0-windows;net7.0;net7.0-windows;net8.0;net8.0-windows;net9.0;net9.0-windows;</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Authors>Sergey Vishneskiy, Morabaa Software Solutions, LTD.</Authors>
         <Company>Sergey Vishneskiy</Company>
         <Product>PDFtoPrinter</Product>
         <Description>Util to print PDF documents using PDFtoPrinter (for windows) and lp (for macOS) utility</Description>
-        <Copyright>Copyright © 2024</Copyright>
+        <Copyright>Copyright © 2025</Copyright>
         <PackageLicense>https://choosealicense.com/licenses/mit/</PackageLicense>
         <PackageProjectUrl>https://github.com/svishnevsky/PDFtoPrinter</PackageProjectUrl>
         <RepositoryUrl>https://github.com/svishnevsky/PDFtoPrinter</RepositoryUrl>
@@ -15,16 +15,18 @@
         <PackageTags>PDF Printing</PackageTags>
         <PackageReleaseNotes>
             - Windows support fix
-            - Adding listing printers
-            - Drop .NET 5 support
         </PackageReleaseNotes>
         <PackageId>PDFtoPrinter</PackageId>
         <RootNamespace>PDFtoPrinter</RootNamespace>
         <AssemblyName>PDFtoPrinter</AssemblyName>
         <LangVersion>7.3</LangVersion>
-        <AssemblyVersion>1.1.1.0</AssemblyVersion>
-        <FileVersion>1.1.1.0</FileVersion>
-        <Version>1.1.1</Version>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <FileVersion>1.0.0.0</FileVersion>
+        <Version>1.0.0</Version>
+    </PropertyGroup>
+      
+    <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
+      <DefineConstants>$(DefineConstants);WINDOWS</DefineConstants>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)' == 'Debug' ">
@@ -48,7 +50,7 @@
         <Reference Include="System.Printing" />
     </ItemGroup>
 
-    <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <ItemGroup Condition="('$(TargetFramework)' == 'netstandard2.0') Or ($(TargetFramework.StartsWith('net')) And !$(TargetFramework.Contains('-windows')) And !$(TargetFramework.StartsWith('net4')))">
         <Compile Remove="CleanupFilesPrinter.cs" />
         <Compile Remove="QueuedFile.cs" />
     </ItemGroup>
@@ -69,7 +71,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Windows.Compatibility" Version="8.0.10" />
+        <PackageReference Include="Microsoft.Windows.Compatibility" Version="9.0.2" />
     </ItemGroup>
 
 </Project>

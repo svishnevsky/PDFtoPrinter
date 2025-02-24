@@ -1,22 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
     <PackageReference Include="Moq">
-      <Version>4.20.69</Version>
+      <Version>4.20.72</Version>
     </PackageReference>
     <PackageReference Include="MSTest.TestAdapter">
-      <Version>3.1.1</Version>
+      <Version>3.8.2</Version>
     </PackageReference>
     <PackageReference Include="MSTest.TestFramework">
-      <Version>3.1.1</Version>
+      <Version>3.8.2</Version>
     </PackageReference>
   </ItemGroup>
 
